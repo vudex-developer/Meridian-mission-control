@@ -28,6 +28,19 @@ export default function DashboardPage() {
   const priorities = recommendations[persona];
   const visibleProjects = projects.slice(0, 7);
   const compactActivity = recentActivity.slice(0, 3);
+  const brief = isLuke
+    ? {
+        decision: "Today is a conversion-cleanup day, not a new-project day.",
+        why: "삼산병원 has been parked in Free Consulting for 21 days and Berkeley Aden is 13 days overdue. Together they represent ₩75M of near-term pipeline that can still move this week.",
+        action: "Send the Paid Diagnosis proposal first, then lock a Berkeley Aden follow-up owner before lunch.",
+        impact: "₩75M pipeline at risk",
+      }
+    : {
+        decision: "Today is an investment-decision day, with VS PharmTech as the highest-conviction memo.",
+        why: "The round timing is closing while Berkeley Aden still needs an MOU call. Delaying either decision weakens the Senior Residence track and the ₩45M unlock.",
+        action: "Finish the VS PharmTech memo, then decide whether Berkeley Aden advances to MOU terms this week.",
+        impact: "₩45M unlock decision",
+      };
 
   return (
     <div className="dashboard-169-board h-full overflow-hidden p-3 xl:p-4">
@@ -41,27 +54,33 @@ export default function DashboardPage() {
           }}
         >
           <div className="grid-bg pointer-events-none absolute inset-0 opacity-50" />
-          <div className="relative grid items-center gap-4 lg:grid-cols-[minmax(0,1.15fr)_auto_minmax(420px,0.9fr)]">
+          <div className="relative grid items-center gap-4 lg:grid-cols-[minmax(0,1.2fr)_auto_minmax(420px,0.82fr)]">
             <div className="min-w-0">
               <div className="flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-accent2">
                 <Icon path="M12 3v2M12 19v2M5 12H3M21 12h-2M6 6l-1.4-1.4M19.4 19.4 18 18M18 6l1.4-1.4M4.6 19.4 6 18M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" size={13} width={1.6} />
                 Morning Brief
               </div>
               <h1 className="m-[7px_0_5px] text-[22px] font-bold leading-[1.15]">Good morning, {founder.name}.</h1>
-              <p className="m-0 line-clamp-2 max-w-[760px] text-[12.5px] leading-[1.45] text-text2">
-                {isLuke ? (
-                  <>
-                    Execution score is <strong className="text-text">71%</strong>. 삼산병원 and Berkeley Aden are the two revenue windows to clear this week, worth an estimated <strong className="text-green">₩75M</strong>.
-                  </>
-                ) : (
-                  <>
-                    Deal score is <strong className="text-text">68%</strong>. VS PharmTech is highest-conviction, while Berkeley Aden needs a decision to unlock <strong className="text-green">₩45M</strong>.
-                  </>
-                )}
-              </p>
+              <div className="morning-brief-depth grid max-w-[840px] gap-2 md:grid-cols-[1fr_1.1fr_1fr]">
+                <div className="rounded-[11px] border border-border bg-bg2/70 p-[10px]">
+                  <div className="mb-[4px] text-[9.5px] font-semibold uppercase tracking-[0.08em] text-accent2">Decision</div>
+                  <div className="text-[11.5px] font-semibold leading-[1.35] text-text">{brief.decision}</div>
+                </div>
+                <div className="rounded-[11px] border border-border bg-bg2/70 p-[10px]">
+                  <div className="mb-[4px] flex items-center justify-between gap-2">
+                    <span className="text-[9.5px] font-semibold uppercase tracking-[0.08em] text-amber">Why now</span>
+                    <span className="shrink-0 rounded-full bg-greendim px-[6px] py-[1px] font-mono text-[9px] font-semibold text-green">{brief.impact}</span>
+                  </div>
+                  <div className="line-clamp-3 text-[11px] leading-[1.4] text-text2">{brief.why}</div>
+                </div>
+                <div className="rounded-[11px] border border-border bg-bg2/70 p-[10px]">
+                  <div className="mb-[4px] text-[9.5px] font-semibold uppercase tracking-[0.08em] text-green">Today's action</div>
+                  <div className="text-[11px] font-medium leading-[1.4] text-text2">{brief.action}</div>
+                </div>
+              </div>
             </div>
 
-            <div className="hidden scale-[0.78] lg:block">
+            <div className="hidden scale-[0.72] lg:block">
               <RingGauge value={founder.execScore} />
             </div>
 

@@ -20,6 +20,16 @@ if (!page.includes("grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)]")) {
   failures.push("Dashboard is missing the 16:9 desktop board grid.");
 }
 
+if (!page.includes("morning-brief-depth")) {
+  failures.push("Morning Brief is missing the structured depth section.");
+}
+
+for (const label of ["Decision", "Why now", "Today's action"]) {
+  if (!page.includes(label)) {
+    failures.push(`Morning Brief is missing the ${label} cue.`);
+  }
+}
+
 if (!nextConfig.includes("allowedDevOrigins") || !nextConfig.includes("172.30.1.45")) {
   failures.push("Next dev config does not allow the chosen network URL origin.");
 }
