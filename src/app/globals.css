@@ -1,26 +1,174 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Meridian Mission Control — Design Tokens (dark theme)
+   Ported from the visual concept prototype.
+   ============================================================ */
+
+@theme {
+  --color-bg: #06090f;
+  --color-bg2: #0a0f1a;
+  --color-surface: #0f1626;
+  --color-surface2: #141d30;
+  --color-surfacehi: #18223a;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border2: rgba(255, 255, 255, 0.11);
+
+  --color-text: #eef2f8;
+  --color-text2: #8d9ab0;
+  --color-text3: #58657e;
+
+  --color-accent: #4c82fb;
+  --color-accent2: #7da6ff;
+  --color-accentdim: rgba(76, 130, 251, 0.14);
+
+  --color-green: #34d399;
+  --color-greendim: rgba(52, 211, 153, 0.13);
+  --color-amber: #f5b845;
+  --color-amberdim: rgba(245, 184, 69, 0.13);
+  --color-red: #f76f6f;
+  --color-reddim: rgba(247, 111, 111, 0.13);
+  --color-violet: #a78bfa;
+  --color-violetdim: rgba(167, 139, 250, 0.13);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::selection {
+  background: rgba(76, 130, 251, 0.32);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes mc-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 0.55;
+  }
+}
+@keyframes mc-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes mc-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes mc-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes mc-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes mc-wave {
+  0%,
+  100% {
+    transform: scaleY(0.32);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes mc-grid {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 46px 46px;
+  }
+}
+@keyframes mc-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Utility animation classes ---------- */
+.animate-up {
+  animation: mc-up 0.5s ease both;
+}
+.animate-fade {
+  animation: mc-fade 0.18s ease both;
+}
+.animate-blink {
+  animation: mc-blink 1.7s infinite;
+}
+.animate-pulse-mc {
+  animation: mc-pulse 2.6s ease-in-out infinite;
+}
+
+.grid-bg {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 46px 46px;
+  animation: mc-grid 9s linear infinite;
+}
+
+/* Hover helper used by nav/list rows */
+.row-hover:hover {
+  background: var(--color-bg2);
 }
