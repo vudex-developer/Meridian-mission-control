@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test:layout": "node scripts/check-dashboard-layout.mjs",
     "build": "next build",
     "start": "next start"
   },
