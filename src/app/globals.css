@@ -172,3 +172,22 @@ body {
 .row-hover:hover {
   background: var(--color-bg2);
 }
+
+.dashboard-phone-feed,
+.dashboard-flip-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-phone-feed {
+  background:
+    radial-gradient(620px 320px at 70% -8%, rgba(76, 130, 251, 0.12), transparent 60%),
+    var(--color-bg);
+}
+
+.dashboard-flip-feed {
+  background:
+    radial-gradient(520px 280px at 72% -6%, rgba(76, 130, 251, 0.11), transparent 60%),
+    var(--color-bg);
+}
